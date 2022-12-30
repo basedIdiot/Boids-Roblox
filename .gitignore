@@ -1,7 +1,6 @@
 # Project place file
 /Boids.rbxlx
-/Boids
-
+/Boids.build.rbxlx
 # Roblox Studio lock files
 /*.rbxlx.lock
 /*.rbxl.lock
