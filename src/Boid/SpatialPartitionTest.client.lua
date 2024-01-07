@@ -1,2 +1,0 @@
---local SpatialPartition = require(script.Parent.SpatialPartition)
---SpatialPartition.new(Vector3.new(-100, -100, -100), Vector3.new(100, 100, 100)):GenerateGizmos()

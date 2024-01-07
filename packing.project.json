@@ -1,0 +1,12 @@
+{
+    "name": "Boids",
+    "tree": {
+      "$path": "Include/Linking.lua",
+      "Packages": {
+        "$path": "Packages",
+        "Boids": {
+            "$path": "lib"
+        }        
+      }
+    }
+  }

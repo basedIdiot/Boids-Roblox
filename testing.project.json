@@ -1,0 +1,24 @@
+{
+    "name": "Boids testing",
+    "tree": {
+      "$className": "DataModel",
+      "StarterPlayer": {
+          "$className": "StarterPlayer",
+          "StarterPlayerScripts": {
+            "$className": "StarterPlayerScripts",
+            "Testing": {
+                "$path": "testing"
+            },
+            "Boids": {
+                "$path": "Include/Linking.lua",
+                "Packages": {
+                    "$path": "Packages",
+                    "Boids": {
+                        "$path": "lib"
+                    }        
+                }
+            }
+          }
+      }
+    }
+}
