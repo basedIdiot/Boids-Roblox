@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Main
         uses: actions/checkout@v3
 
-     - name: Setup Aftman
+      - name: Setup Aftman
         uses: ok-nick/setup-aftman@v0.3.0
         with: 
           token: ${{ secrets.GITHUB_TOKEN }}
