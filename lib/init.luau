@@ -223,18 +223,18 @@ function Boid.Schema:Set(Property: string, input)
 	self.__Actor:SendMessage("UpdateBoid", self.Id, Property, input)
 end
 -- Position update --
-RunService.Heartbeat:Connect(function(DeltaTime)
+RunService.Heartbeat:Connect(function()
 	if not AutoUpdate then
 		return
 	end
 	local PartTable = table.create(#BoidArray)
 	local PositionTable = table.create(#BoidArray)
-	for _, Boid in ipairs(BoidArray) do
-		if Boid.Model:IsA("BasePart") then
+	for _, BoidToUpdate in ipairs(BoidArray) do
+		if BoidToUpdate.Model:IsA("BasePart") then
 			table.insert(PartTable, Boid.Model)
 			table.insert(PositionTable, CFrame.new(Boid.Position, Boid.Position + Boid.Velocity))
 		else
-			Boid.Model:PivotTo(CFrame.new(Boid.Position, Boid.Position + Boid.Velocity))
+			BoidToUpdate.Model:PivotTo(CFrame.new(Boid.Position, Boid.Position + Boid.Velocity))
 		end
 	end
 	workspace:BulkMoveTo(PartTable, PositionTable, Enum.BulkMoveMode.FireCFrameChanged)
@@ -242,10 +242,10 @@ end)
 -- Velocity update --
 -- Seperated from position update due to possible differing update frequencies
 script.BoidDone.Event:Connect(function(BoidId, Position, Velocity, Acceleration)
-	local Boid = Boid.Interface.GetBoidFromId(BoidId)
-	Boid.Position = Position
-	Boid.Velocity = Velocity
-	Boid.Acceleration = Acceleration
+	local BoidToUpdate = Boid.Interface.GetBoidFromId(BoidId)
+	BoidToUpdate.Position = Position
+	BoidToUpdate.Velocity = Velocity
+	BoidToUpdate.Acceleration = Acceleration
 end)
 
 return Boid.Interface
