@@ -37,7 +37,6 @@ local COHESIVE_WEIGHT = 1
 local OBSTACLE_AVOID_WEIGHT = 20
 local TARGET_WEIGHT = 1
 
-
 local BoidArray = {}
 Boid.BoidArray = BoidArray
 local SharedBoidTable = SharedTable.new()
@@ -166,7 +165,7 @@ function Boid.Interface.new(
 
 		__Directions = ComputeSphereVectors(OBSTACLE_AVOID_RADIUS),
 		__Janitor = Janitor.new(),
-		__Actor = ActorArray[CurrentActor + 1]
+		__Actor = ActorArray[CurrentActor + 1],
 	}
 	self.__Actor:SendMessage("NewBoid", self)
 	CurrentActor = (CurrentActor + 1) % NUM_ACTORS
@@ -178,7 +177,7 @@ function Boid.Interface.new(
 	SharedBoidTable[Id] = {
 		Id = self.Id,
 		Position = self.Position,
-		Velocity = self.Velocity
+		Velocity = self.Velocity,
 	}
 	return setmetatable(self, Boid.Metatable)
 end
@@ -242,7 +241,7 @@ RunService.Heartbeat:Connect(function(DeltaTime)
 end)
 -- Velocity update --
 -- Seperated from position update due to possible differing update frequencies
-script.BoidDone.Event:Connect(function (BoidId, Position, Velocity, Acceleration)
+script.BoidDone.Event:Connect(function(BoidId, Position, Velocity, Acceleration)
 	local Boid = Boid.Interface.GetBoidFromId(BoidId)
 	Boid.Position = Position
 	Boid.Velocity = Velocity

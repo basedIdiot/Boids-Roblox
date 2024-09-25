@@ -35,7 +35,14 @@ local function IsBoidVisible(self, OtherBoid)
 	return true
 end
 local function IsHeadingForCollision(self)
-	if workspace:Spherecast(self.Position, self.ObstacleMargin, self.Velocity.Unit * self.ObstacleAvoidRadius, self.ObstacleParams) then
+	if
+		workspace:Spherecast(
+			self.Position,
+			self.ObstacleMargin,
+			self.Velocity.Unit * self.ObstacleAvoidRadius,
+			self.ObstacleParams
+		)
+	then
 		return true
 	end
 	return false
@@ -62,7 +69,7 @@ end
 local function ComputeAcceleration(self): Vector3?
 	local Acceleration = Vector3.zero
 
-	local TargetHeading = if self.Target then (self.Target - self.Position)  * self.TargetWeight else Vector3.zero
+	local TargetHeading = if self.Target then (self.Target - self.Position) * self.TargetWeight else Vector3.zero
 	Acceleration += TargetHeading
 
 	if self.IsObstacleAvoidanceEnabled and IsHeadingForCollision(self) then
@@ -132,7 +139,9 @@ local function UpdateLocalBoidTable()
 	debug.profileend()
 end
 RunService.Heartbeat:ConnectParallel(function(Dt)
-	if Paused then return end
+	if Paused then
+		return
+	end
 	UpdateLocalBoidTable()
 	for _, Boid in BoidsToUpdate do
 		local Acceleration = ComputeAcceleration(Boid)
@@ -155,8 +164,8 @@ RunService.Heartbeat:ConnectParallel(function(Dt)
 
 		SharedBoidTable[Boid.Id].Position = Position
 		SharedBoidTable[Boid.Id].Velocity = Velocity
-		
-    	BoidDone:Fire(Boid.Id, Position, Velocity, Acceleration)
+
+		BoidDone:Fire(Boid.Id, Position, Velocity, Acceleration)
 	end
 end)
 Actor:BindToMessage("NewBoid", function(Boid)
