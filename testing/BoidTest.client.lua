@@ -1,6 +1,5 @@
 --!native
 local Boids = require(script.Parent.Parent.Boids)
-local Janitor = require(script.Parent.Parent.Boids.Packages.janitor)
 --local BoxContainer = require(script.Parent.BoxContainer).new(Vector3.zero, Vector3.new(200, 200, 200))
 local RandomGenerator = Random.new()
 local BoidTemplate = Instance.new("Part")
@@ -11,7 +10,7 @@ BoidTemplate.CanCollide = false
 BoidTemplate.CanQuery = false
 BoidTemplate.Anchored = true
 Boids.Pause()
-for _ = 1, 700, 1 do
+for _ = 1, 300, 1 do
 	local X = RandomGenerator:NextNumber(-5, 5)
 	local Y = RandomGenerator:NextNumber(-5, 5)
 	local Z = RandomGenerator:NextNumber(-5, 5)

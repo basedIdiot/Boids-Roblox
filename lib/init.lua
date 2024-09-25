@@ -5,10 +5,6 @@ Boid.Schema = {}
 Boid.Metatable = { __index = Boid.Schema }
 Boid.__index = {}
 
-local BoxContainer = require(script.BoxContainer)
-type BoxContainer = BoxContainer.BoxContainer
-
-local VectorVisualizer = require(script.VectorVisualizer)
 local Janitor = require(script.Parent.janitor)
 
 local RunService = game:GetService("RunService")
@@ -196,19 +192,6 @@ function Boid.Schema:Destroy()
 	table.remove(BoidIdMap, self.Id)
 	table.remove(BoidArray, table.find(BoidArray, self))
 end
-function Boid.Schema:IsBoidVisible(OtherBoid: Boid)
-	if OtherBoid.Id == self.Id then
-		return false
-	end
-
-	if (self.Position - OtherBoid.Position).Magnitude > self.Range then
-		return false
-	end
-	if GetAngleBetweenVectors(self.Position, OtherBoid.Position) > self.ViewAngle then
-		return false
-	end
-	return true
-end
 function Boid.Schema:GetDirection(): Vector3
 	return self.Velocity.Unit
 end
@@ -242,133 +225,6 @@ function Boid.Schema:Set(Property: string, input)
 	end
 	self[Property] = input
 	self.__Actor:SendMessage("UpdateBoid", self.Id, Property, input)
-end
-function Boid.Schema:IsHeadingForCollision()
-	if workspace:Spherecast(self.Position, OBSTACLE_MARGIN, self.Velocity.Unit * self.ObstacleAvoidRadius, self.ObstacleParams) then
-		return true
-	end
-	return false
-end
-function Boid.Schema:GetFurthestUnobstructedDirection()
-	local BestDirection = Vector3.zero
-	local FurthestUnobstructedDistance = 0
-	for _, Direction in self.__Directions do
-		Direction = CFrame.lookAt(Vector3.zero, self:GetDirection()) * Direction
-		local Hit = workspace:Spherecast(self.Position, self.ObstacleMargin, Direction, self.ObstacleParams)
-		if not Hit then
-			BestDirection = Direction
-			break
-		end
-		if Hit.Distance > FurthestUnobstructedDistance then
-			BestDirection = Direction
-			FurthestUnobstructedDistance = Hit.Distance
-		end
-	end
-	--Gizmo.PushProperty("AlwaysOnTop", true)
-	--Gizmo.Ray:Draw(self.Position, self.Position + BestDirection)
-	return BestDirection
-end
-function Boid.Schema:__CalculateAcceleration(): Vector3
-	local Acceleration = Vector3.zero
-
-	local TargetHeading = if self.Target then (self.Target - self.Position)  * self.TargetWeight else Vector3.zero
-	Acceleration += TargetHeading
-
-	if self.IsObstacleAvoidanceEnabled and self:IsHeadingForCollision() then
-		Acceleration += self:GetFurthestUnobstructedDirection().Unit * self.ObstacleAvoidWeight
-	end
-
-	local NumBoids = 0
-	local AvoidBoids = 0
-
-	local AverageHeading = Vector3.zero
-	local AveragePosition = Vector3.zero
-	local SeperationHeading = Vector3.zero
-	for _, OtherBoid: Boid in ipairs(BoidArray) do
-		if OtherBoid.Id == self.Id then
-			continue
-		end
-		if not self:IsBoidVisible(OtherBoid) then
-			continue
-		end
-		local Offset = OtherBoid.Position - self.Position
-		local Distance = Offset.Magnitude
-		AverageHeading += OtherBoid.Velocity
-		AveragePosition += OtherBoid.Position
-		if Distance < self.AvoidRadius then
-			SeperationHeading -= Offset / (Distance + 1)
-			AvoidBoids += 1
-		end
-		NumBoids += 1
-	end
-	if NumBoids > 0 then
-		AverageHeading /= NumBoids
-		AverageHeading *= self.AlignWeight
-		Acceleration += AverageHeading
-
-		AveragePosition = AveragePosition / NumBoids - self.Position
-		AveragePosition *= self.CohesiveWeight
-		Acceleration += AveragePosition
-	end
-	if AvoidBoids > 0 then
-		SeperationHeading /= AvoidBoids
-		SeperationHeading *= self.SeparationWeight
-		Acceleration += SeperationHeading
-	end
-
-	Acceleration = Acceleration * self.MaxAcceleration
-	return Acceleration
-end
-function Boid.Schema:UpdateVelocity(Velocity: Vector3?)
-	if Velocity then
-		self:SetVelocity(Velocity)
-		return
-	end
-	self.Velocity += self.Acceleration * (os.clock() - self.__LastVelocityUpdateTime)
-	self.Velocity = ClampVector(self.Velocity, self.MaxSpeed)
-	self.__LastVelocityUpdateTime = os.clock()
-	SharedBoidTable[self.Id].Velocity = self.Velocity
-	self:Set("Velocity", self.Velocity) -- I hate this
-end
-function Boid.Schema:UpdatePosition(dt: NumberValue)
-	self.Position += self.Velocity * dt
-	if self.BoxContainer then
-		if not self.BoxContainer:IsInside(self.Position) then
-			self.Position = self.BoxContainer:ConstrainPosition(
-				self.Position
-			)
-		end
-	end
-	self:Set("Position", self.Position)
-	SharedBoidTable[self.Id].Position = self.Position
-end
-function Boid.Schema:ShowVelocity()
-	if self.VelocityPart then
-		return
-	end
-	self.VelocityPart = VectorVisualizer.VisualizeUnitVector(self.Velocity, self.Position)
-	self.VelocityPart.Color = Color3.new(0.686274, 0.086274, 0.086274)
-	self.__Janitor:Add(self.VelocityPart, "Destroy", "Velocity Part")
-end
-function Boid.Schema:HideVelocity()
-	if self.VelocityPart then
-		self.VelocityPart:Destroy()
-		self.__Janitor:Remove("Velocity Part")
-	end
-end
-function Boid.Schema:ShowAcceleration()
-	if self.AccelerationPart then
-		return
-	end
-	self.AccelerationPart = VectorVisualizer.VisualizeUnitVector(self.Acceleration, self.Position)
-	self.AccelerationPart.Color = Color3.new(0.078431, 0.701960, 0.286274)
-	self.__Janitor:Add(self.AccelerationPart, "Destroy", "Acceleration Part")
-end
-function Boid.Schema:HideAcceleration()
-	if self.AccelerationPart then
-		self.AccelerationPart:Destroy()
-		self.__Janitor:Remove("Acceleration Part")
-	end
 end
 -- Position update --
 RunService.Heartbeat:Connect(function(DeltaTime)
