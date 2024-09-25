@@ -9,6 +9,7 @@ BoidTemplate.CastShadow = false
 BoidTemplate.CanCollide = false
 BoidTemplate.CanQuery = false
 BoidTemplate.Anchored = true
+
 Boids.Pause()
 for _ = 1, 300, 1 do
 	local X = RandomGenerator:NextNumber(-5, 5)
@@ -20,7 +21,7 @@ for _ = 1, 300, 1 do
 	Z = RandomGenerator:NextNumber(-10, 10)
 	local Velocity = Vector3.new(X, Y, Z)
 	local Boid = Boids.new(BoidTemplate, Position, Velocity)
-	
 end
+
 task.wait(5)
 Boids.Unpause()
