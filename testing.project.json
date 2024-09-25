@@ -19,6 +19,12 @@
                 }
             }
           }
+      },
+      "Players": {
+        "$className": "Players",
+        "$properties": {
+            "CharacterAutoLoads": true
+        }
       }
     }
 }
