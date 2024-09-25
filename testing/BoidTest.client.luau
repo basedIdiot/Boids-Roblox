@@ -20,9 +20,7 @@ for _ = 1, 300, 1 do
 	Z = RandomGenerator:NextNumber(-10, 10)
 	local Velocity = Vector3.new(X, Y, Z)
 	local Boid = Boids.new(BoidTemplate, Position, Velocity)
-	--Boid.BoxContainer = BoxContainer
-	--Boid:ShowAcceleration()
-	--Boid:ShowVelocity()
+	
 end
 task.wait(5)
 Boids.Unpause()

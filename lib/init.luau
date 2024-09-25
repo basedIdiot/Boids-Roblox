@@ -171,7 +171,7 @@ function Boid.Interface.new(
 	self.__Actor:SendMessage("NewBoid", self)
 	CurrentActor = (CurrentActor + 1) % NUM_ACTORS
 	if self.Model then
-		self.__Janitor:Add(Model, "Destroy")
+		self.__Janitor:Add(self.Model)
 	end
 	table.insert(BoidArray, self)
 	BoidIdMap[Id] = self
@@ -185,8 +185,9 @@ end
 function Boid.Schema:Destroy()
 	self.__Actor:SendMessage("DestroyBoid", self.Id)
 	self.__Janitor:Destroy()
-	table.remove(BoidIdMap, self.Id)
+	BoidIdMap[self.Id] = nil
 	table.remove(BoidArray, table.find(BoidArray, self))
+	SharedBoidTable[self.Id] = nil
 end
 function Boid.Schema:GetDirection(): Vector3
 	return self.Velocity.Unit

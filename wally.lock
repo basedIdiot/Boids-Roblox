@@ -3,11 +3,16 @@
 registry = "test"
 
 [[package]]
-name = "howmanysmall/janitor"
-version = "1.15.3"
+name = "evaera/promise"
+version = "4.0.0"
 dependencies = []
+
+[[package]]
+name = "howmanysmall/janitor"
+version = "1.17.0"
+dependencies = [["Promise", "evaera/promise@4.0.0"]]
 
 [[package]]
 name = "somem/boids"
 version = "0.1.0"
-dependencies = [["janitor", "howmanysmall/janitor@1.15.3"]]
+dependencies = [["janitor", "howmanysmall/janitor@1.17.0"]]
