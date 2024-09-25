@@ -311,18 +311,18 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>17.5013695</X>
-					<Y>3.17904949</Y>
-					<Z>-46.1455078</Z>
-					<R00>-1</R00>
-					<R01>0</R01>
-					<R02>-0</R02>
+					<X>43.0419083</X>
+					<Y>10.8234663</Y>
+					<Z>7.79120731</Z>
+					<R00>-0.763789117</R00>
+					<R01>0.518186271</R01>
+					<R02>-0.384849548</R02>
 					<R10>-0</R10>
-					<R11>1</R11>
-					<R12>-0</R12>
-					<R20>-0</R20>
-					<R21>0</R21>
-					<R22>-1</R22>
+					<R11>0.596235335</R11>
+					<R12>0.802809715</R12>
+					<R20>0.645465851</R20>
+					<R21>0.613177299</R21>
+					<R22>-0.455398083</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -331,9 +331,9 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>17.5013695</X>
-					<Y>3.17904949</Y>
-					<Z>-44.1455078</Z>
+					<X>43.8116074</X>
+					<Y>9.21784687</Y>
+					<Z>8.70200348</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -400,7 +400,22 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">6d774d959b01b73807051d29000074ef</UniqueId>
-					<OptionalCoordinateFrame name="WorldPivotData"></OptionalCoordinateFrame>
+					<OptionalCoordinateFrame name="WorldPivotData">
+						<CFrame>
+							<X>17.75</X>
+							<Y>26.0000114</Y>
+							<Z>2.5</Z>
+							<R00>1</R00>
+							<R01>0</R01>
+							<R02>0</R02>
+							<R10>0</R10>
+							<R11>1</R11>
+							<R12>0</R12>
+							<R20>0</R20>
+							<R21>0</R21>
+							<R22>1</R22>
+						</CFrame>
+					</OptionalCoordinateFrame>
 				</Properties>
 				<Item class="Part" referent="RBX3B9DC1EAB2C84A7B8B0D377745A190AF">
 					<Properties>
@@ -440,7 +455,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CustomPhysics>false</CustomPhysics>
 						</PhysicalProperties>
 						<bool name="DefinesCapabilities">false</bool>
-						<bool name="EnableFluidForces">true</bool>
+						<bool name="EnableFluidForces">false</bool>
 						<float name="FrontParamA">-0.5</float>
 						<float name="FrontParamB">0.5</float>
 						<token name="FrontSurface">0</token>
@@ -540,7 +555,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CustomPhysics>false</CustomPhysics>
 						</PhysicalProperties>
 						<bool name="DefinesCapabilities">false</bool>
-						<bool name="EnableFluidForces">true</bool>
+						<bool name="EnableFluidForces">false</bool>
 						<float name="FrontParamA">-0.5</float>
 						<float name="FrontParamB">0.5</float>
 						<token name="FrontSurface">0</token>
@@ -640,7 +655,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CustomPhysics>false</CustomPhysics>
 						</PhysicalProperties>
 						<bool name="DefinesCapabilities">false</bool>
-						<bool name="EnableFluidForces">true</bool>
+						<bool name="EnableFluidForces">false</bool>
 						<float name="FrontParamA">-0.5</float>
 						<float name="FrontParamB">0.5</float>
 						<token name="FrontSurface">0</token>
@@ -740,7 +755,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CustomPhysics>false</CustomPhysics>
 						</PhysicalProperties>
 						<bool name="DefinesCapabilities">false</bool>
-						<bool name="EnableFluidForces">true</bool>
+						<bool name="EnableFluidForces">false</bool>
 						<float name="FrontParamA">-0.5</float>
 						<float name="FrontParamB">0.5</float>
 						<token name="FrontSurface">0</token>
@@ -840,7 +855,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CustomPhysics>false</CustomPhysics>
 						</PhysicalProperties>
 						<bool name="DefinesCapabilities">false</bool>
-						<bool name="EnableFluidForces">true</bool>
+						<bool name="EnableFluidForces">false</bool>
 						<float name="FrontParamA">-0.5</float>
 						<float name="FrontParamB">0.5</float>
 						<token name="FrontSurface">0</token>
@@ -940,7 +955,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CustomPhysics>false</CustomPhysics>
 						</PhysicalProperties>
 						<bool name="DefinesCapabilities">false</bool>
-						<bool name="EnableFluidForces">true</bool>
+						<bool name="EnableFluidForces">false</bool>
 						<float name="FrontParamA">-0.5</float>
 						<float name="FrontParamB">0.5</float>
 						<token name="FrontSurface">0</token>
@@ -1040,7 +1055,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CustomPhysics>false</CustomPhysics>
 						</PhysicalProperties>
 						<bool name="DefinesCapabilities">false</bool>
-						<bool name="EnableFluidForces">true</bool>
+						<bool name="EnableFluidForces">false</bool>
 						<float name="FrontParamA">-0.5</float>
 						<float name="FrontParamB">0.5</float>
 						<token name="FrontSurface">0</token>
@@ -5425,7 +5440,7 @@ return Gizmo
 									<UniqueId name="UniqueId">5ce27d22ecb9388b070402df00005c12</UniqueId>
 								</Properties>
 							</Item>
-							<Item class="LocalScript" referent="RBX160D1425DB5D45DFB0FD79D1CCB6A8A7">
+							<Item class="Script" referent="RBX9DC16FC2BB9A4D87B7039B8BA27C897F">
 								<Properties>
 									<BinaryString name="AttributesSerialize"></BinaryString>
 									<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -5434,8 +5449,8 @@ return Gizmo
 									<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
 									<Content name="LinkedSource"><null></null></Content>
 									<string name="Name">BoidActorScript</string>
-									<token name="RunContext">0</token>
-									<string name="ScriptGuid">{17AB8863-98C8-43BA-BDE5-B7B5144904F2}</string>
+									<token name="RunContext">2</token>
+									<string name="ScriptGuid">{BCFF0E2E-0724-40DD-8F9C-76D002D0218D}</string>
 									<ProtectedString name="Source"><![CDATA[local SharedTableRegistry = game:GetService("SharedTableRegistry")
 local RunService = game:GetService("RunService")
 
@@ -5614,7 +5629,7 @@ Actor:BindToMessage("Unpause", function()
 end)]]></ProtectedString>
 									<int64 name="SourceAssetId">-1</int64>
 									<BinaryString name="Tags"></BinaryString>
-									<UniqueId name="UniqueId">6d774d959b01b73807051d2900006041</UniqueId>
+									<UniqueId name="UniqueId">00ae176e565c4b0407052491000053a3</UniqueId>
 								</Properties>
 							</Item>
 						</Item>
@@ -5688,7 +5703,7 @@ end)]]></ProtectedString>
 									<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
 									<Content name="LinkedSource"><null></null></Content>
 									<string name="Name">BoidActorScript</string>
-									<token name="RunContext">0</token>
+									<token name="RunContext">1</token>
 									<string name="ScriptGuid">{555FE2DB-93FB-425A-941A-B703083B706C}</string>
 									<ProtectedString name="Source"><![CDATA[local SharedTableRegistry = game:GetService("SharedTableRegistry")
 local RunService = game:GetService("RunService")
@@ -5886,7 +5901,7 @@ end)]]></ProtectedString>
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">6aa5ca279eda671204c67b5600003d36</UniqueId>
 				</Properties>
-				<Item class="LocalScript" referent="RBX35ABC0A579D447C0B26DD658DBC002F2">
+				<Item class="Script" referent="RBX52A4139810FD4EC2A2C8BDC65430D79E">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -5895,8 +5910,8 @@ end)]]></ProtectedString>
 						<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
 						<Content name="LinkedSource"><null></null></Content>
 						<string name="Name">BoidTest</string>
-						<token name="RunContext">0</token>
-						<string name="ScriptGuid">{4195B489-8A4F-4E9C-972B-97AB8EDF2292}</string>
+						<token name="RunContext">2</token>
+						<string name="ScriptGuid">{53AA4C50-2FAB-4499-974B-FEF267988230}</string>
 						<ProtectedString name="Source"><![CDATA[--!native
 local Boids = require(script.Parent.Parent.Boids)
 --local BoxContainer = require(script.Parent.BoxContainer).new(Vector3.zero, Vector3.new(200, 200, 200))
@@ -5928,7 +5943,7 @@ Boids.Unpause()
 ]]></ProtectedString>
 						<int64 name="SourceAssetId">-1</int64>
 						<BinaryString name="Tags"></BinaryString>
-						<UniqueId name="UniqueId">6d774d959b01b73807051d290000603f</UniqueId>
+						<UniqueId name="UniqueId">00ae176e565c4b0407052491000056bd</UniqueId>
 					</Properties>
 				</Item>
 			</Item>
