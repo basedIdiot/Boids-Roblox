@@ -1,5 +1,6 @@
 {
     "name": "Boids testing",
+    "emitLegacyScripts": false,
     "tree": {
       "$className": "DataModel",
       "StarterPlayer": {
@@ -10,7 +11,7 @@
                 "$path": "testing"
             },
             "Boids": {
-                "$path": "Include/Linking.lua",
+                "$path": "Include/Linking.luau",
                 "Packages": {
                     "$path": "Packages",
                     "Boids": {
@@ -24,6 +25,12 @@
         "$className": "Players",
         "$properties": {
             "CharacterAutoLoads": true
+        }
+      },
+      "Workspace": {
+        "$className": "Workspace",
+        "Parts": {
+          "$path": "testing model"
         }
       }
     }

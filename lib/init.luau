@@ -47,11 +47,20 @@ SharedTableRegistry:SetSharedTable("BoidTable", SharedBoidTable)
 local ActorArray = {}
 local CurrentActor = 0
 for i = 1, NUM_ACTORS do
-	local NewActor = script.BoidActor:Clone()
+	local NewActor
+	if RunService:IsClient() then
+		NewActor = script.BoidActor:Clone()
+	else
+		NewActor = script.BoidActorServer:Clone()
+	end
 	NewActor.BoidActorScript.Enabled = true
 	NewActor.Parent = script
 	ActorArray[i] = NewActor
 end
+
+local BoidFolder = Instance.new("Folder")
+BoidFolder.Name = "Boids"
+BoidFolder.Parent = workspace
 
 export type Boid = typeof(Boid.Interface.new(table.unpack(...)))--[[{
 	Model: BasePart | Model,
@@ -72,19 +81,6 @@ export type Boid = typeof(Boid.Interface.new(table.unpack(...)))--[[{
 
 	Id: number,
 }]]
-local function slice(t, minIndex, maxIndex)
-	local result = {}
-	return table.move(t, minIndex, maxIndex - 1, 1, result)
-end
-local function GetAngleBetweenVectors(V1: Vector3, V2: Vector3): number
-	return math.acos(V1:Dot(V2) / V1.Magnitude / V2.Magnitude)
-end
-local function ClampVector(Vector: Vector3, Max: number): Vector3
-	if Vector.Magnitude >= Max then
-		return Vector.Unit * Max
-	end
-	return Vector
-end
 local function ComputeSphereVectors(Length: number?): { [number]: Vector3 }
 	local Directions = table.create(NUM_VIEW_DIRECTIONS)
 	Length = Length or 1
@@ -129,7 +125,7 @@ function Boid.Interface.new(
 ): Boid
 	local NewModel = Model:Clone()
 	NewModel:PivotTo(CFrame.lookAt(Position, Position + Velocity))
-	NewModel.Parent = workspace.Boids
+	NewModel.Parent = BoidFolder
 
 	local Id = HttpService:GenerateGUID()
 	-- Have to be comically unlucky for while loop to happen
@@ -239,12 +235,6 @@ RunService.Heartbeat:Connect(function(DeltaTime)
 			table.insert(PositionTable, CFrame.new(Boid.Position, Boid.Position + Boid.Velocity))
 		else
 			Boid.Model:PivotTo(CFrame.new(Boid.Position, Boid.Position + Boid.Velocity))
-		end
-		if Boid.VelocityPart then
-			VectorVisualizer.UpdateUnitVector(Boid.VelocityPart, Boid.Velocity, Boid.Position)
-		end
-		if Boid.AccelerationPart then
-			VectorVisualizer.UpdateUnitVector(Boid.AccelerationPart, Boid.Acceleration, Boid.Position)
 		end
 	end
 	workspace:BulkMoveTo(PartTable, PositionTable, Enum.BulkMoveMode.FireCFrameChanged)
